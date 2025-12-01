@@ -1,0 +1,41 @@
+Language: Cpp
+
+BasedOnStyle: LLVM
+
+UseTab: Never 
+ColumnLimit: 120
+
+AlignAfterOpenBracket: Align
+
+PointerAlignment: Left
+
+NamespaceIndentation: All
+
+FixNamespaceComments: true
+
+AllowShortCaseLabelsOnASingleLine : true
+AllowShortCompoundRequirementOnASingleLine: true
+AllowShortEnumsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortLambdasOnASingleLine: All
+
+BreakTemplateDeclarations: Yes
+BreakAdjacentStringLiterals: true
+BreakBeforeConceptDeclarations: Always
+BreakBeforeTemplateCloser: true
+
+Cpp11BracedListStyle: true
+
+EmptyLineBeforeAccessModifier: Always
+EnumTrailingComma: Remove
+
+IncludeBlocks: Regroup
+
+IndentPPDirectives: AfterHash
+IndentRequiresClause: true
+IndentWidth: 4
+
+ShortNamespaceLines: 0
+
+PackConstructorInitializers: NextLineOnly
