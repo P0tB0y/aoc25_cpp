@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <print>
+#include <ranges>
 
 struct Rotation {
     enum class Direction { Left, Right };
@@ -42,14 +43,13 @@ class Lock {
         case Left: current_number -= step; break;
         case Right: current_number += step; break;
         }
+
         if ((!is_zero && current_number < 0) || current_number > 100) {
             zero_count++;
         }
 
+        current_number += 100;
         current_number %= 100;
-        if (current_number < 0) {
-            current_number += 100;
-        }
 
         if (current_number == 0) {
             zero_count++;
@@ -77,10 +77,8 @@ auto main(int argc, char** argv) -> int {
         return -1;
     }
 
-    auto rotation{Rotation{}};
     auto lock{Lock{}};
-
-    while (file >> rotation) {
+    for (const auto& rotation : std::views::istream<Rotation>(file)) {
         lock.rotate(rotation);
     }
 
