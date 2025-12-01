@@ -33,20 +33,22 @@ class Lock {
 
         switch (rot.direction) {
             using enum Rotation::Direction;
-        case Left: current_number -= rot.count; break;
-        case Right: current_number += rot.count; break;
+        case Left: m_current_number -= rot.count; break;
+        case Right: m_current_number += rot.count; break;
         }
 
-        current_number += 100;
-        current_number %= 100;
+        m_current_number = (m_current_number + 100) % 100;
 
-        if (current_number == 0) {
-            zero_count++;
+        if (m_current_number == 0) {
+            m_zero_count++;
         }
     }
 
-    int zero_count{0};
-    int current_number{50};
+    auto zero_count() -> int { return m_zero_count; }
+
+  private:
+    int m_zero_count{0};
+    int m_current_number{50};
 };
 
 auto main(int argc, char** argv) -> int {
@@ -72,5 +74,5 @@ auto main(int argc, char** argv) -> int {
         lock.rotate(rotation);
     }
 
-    std::println("output: {}", lock.zero_count);
+    std::println("output: {}", lock.zero_count());
 }

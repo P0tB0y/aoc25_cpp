@@ -32,32 +32,30 @@ class Lock {
         auto step{rot.count};
 
         if (step > 100) {
-            zero_count += (step / 100);
+            m_zero_count += (step / 100);
             step %= 100;
         }
 
-        bool is_zero{current_number == 0};
+        const bool is_zero{m_current_number == 0};
 
         switch (rot.direction) {
             using enum Rotation::Direction;
-        case Left: current_number -= step; break;
-        case Right: current_number += step; break;
+        case Left: m_current_number -= step; break;
+        case Right: m_current_number += step; break;
         }
 
-        if ((!is_zero && current_number < 0) || current_number > 100) {
-            zero_count++;
+        if ((!is_zero && m_current_number <= 0) || m_current_number >= 100) {
+            m_zero_count++;
         }
 
-        current_number += 100;
-        current_number %= 100;
-
-        if (current_number == 0) {
-            zero_count++;
-        }
+        m_current_number = (m_current_number + 100) % 100;
     }
 
-    int zero_count{0};
-    int current_number{50};
+    auto zero_count() -> int { return m_zero_count; }
+
+  private:
+    int m_zero_count{0};
+    int m_current_number{50};
 };
 
 auto main(int argc, char** argv) -> int {
@@ -82,5 +80,5 @@ auto main(int argc, char** argv) -> int {
         lock.rotate(rotation);
     }
 
-    std::println("output: {}", lock.zero_count);
+    std::println("output: {}", lock.zero_count());
 }
